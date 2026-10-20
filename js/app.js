@@ -61,6 +61,12 @@ function renderAnswer(result) {
   summary.className = "summary";
   summary.textContent = result.summary;
 
+  const neighbor = document.createElement("p");
+  if (result.neighbor) {
+    neighbor.className = "neighbor";
+    neighbor.textContent = result.neighbor;
+  }
+
   const unfoldLabel = document.createElement("h3");
   unfoldLabel.textContent = result.labels.unfold;
 
@@ -81,7 +87,7 @@ function renderAnswer(result) {
   columns.className = "columns";
   columns.append(renderList(result.labels.known, result.known), renderList(result.labels.open, result.open));
 
-  answer.append(mark, title, summary, unfoldLabel, steps, columns);
+  answer.append(mark, title, summary, ...(result.neighbor ? [neighbor] : []), unfoldLabel, steps, columns);
 }
 
 function renderList(label, items) {

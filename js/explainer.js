@@ -5,22 +5,30 @@ const SCENES = [
       /(verschwind|weg\b|ohne|kein).{0,40}mond/,
       /moon.{0,40}(disappear|vanish|gone|without|missing)/,
       /(no|without) moon/,
+      /mond.{0,40}nicht mehr da/,
+      /nicht mehr da.{0,30}mond/,
+      /moon.{0,40}(no longer there|is not there|isn.t there)/,
     ],
+    near: [/\bmond\b/, /\bmoon\b/],
+    written: {
+      de: "der Mond über Nacht verschwindet",
+      en: "the Moon disappeared overnight",
+    },
     de: {
       summary:
-        "Der Mond ist nicht nur Licht in der Nacht. Er zieht an den Meeren und stabilisiert die Neigung der Erdachse. Verschwindet er über Nacht, ist der Himmel sofort anders. Das Klima erst über lange Zeit.",
+        "Der Mond ist nicht nur Licht in der Nacht. Er zieht an den Meeren und stabilisiert die Neigung der Erdachse. Verschwindet er über Nacht, ist der Himmel sofort anders. Das Klima erst über Millionen Jahre.",
       steps: [
         {
           when: "Sofort",
-          text: "In der ersten Nacht wird es deutlich dunkler. Die Gezeiten werden schwächer und unruhiger, weil vor allem die Sonne noch am Wasser zieht.",
+          text: "In der ersten Nacht wird es deutlich dunkler. Die Gezeiten werden schwächer, weil vor allem die Sonne noch am Wasser zieht.",
         },
         {
           when: "Danach",
-          text: "Ohne den Mond dreht sich die Erde ganz langsam schneller. Der Tag würde über sehr lange Zeit kürzer, nicht schon am nächsten Morgen.",
+          text: "Die Gezeiten des Mondes bremsen die Erddrehung heute ab, der Tag wird dadurch langsam länger. Ohne Mond fällt diese Bremse weg. Der Tag wird dadurch nicht kürzer. Er behält ungefähr die heutige Länge.",
         },
         {
           when: "Auf Dauer",
-          text: "Die Erdachse könnte über Jahrtausende stärker kippen. Jahreszeiten würden extremer, weil der Mond die Achse heute ruhig hält.",
+          text: "Über Millionen Jahre könnte die Erdachse stärker schwanken. Jahreszeiten würden extremer oder zeitweise fast verschwinden, weil der Mond die Neigung heute in einem engen Bereich hält.",
         },
       ],
       known: [
@@ -34,19 +42,19 @@ const SCENES = [
     },
     en: {
       summary:
-        "The Moon is not only a light in the night. It pulls on the oceans and steadies the tilt of Earth's axis. If it vanished overnight, the sky would change at once. The climate would change over a very long time.",
+        "The Moon is not only a light in the night. It pulls on the oceans and steadies the tilt of Earth's axis. If it vanished overnight, the sky would change at once. The climate would change over millions of years.",
       steps: [
         {
           when: "At once",
-          text: "The first night would be much darker. Tides would grow weaker and less regular, because the Sun would be the main pull left on the water.",
+          text: "The first night would be much darker. Tides would grow weaker, because the Sun would be the main pull left on the water.",
         },
         {
           when: "After that",
-          text: "Without the Moon, Earth would spin a little faster. Days would shorten over a vast stretch of time, not by tomorrow morning.",
+          text: "The Moon's tides slowly brake Earth's spin, so the day is gradually getting longer. Without the Moon that brake is gone. The day would not grow shorter. It would stay about as long as it is now.",
         },
         {
           when: "Over time",
-          text: "Earth's axis could wobble more across thousands of years. Seasons could become more extreme, because the Moon is what keeps that tilt steady.",
+          text: "Across millions of years Earth's axis could wobble more. Seasons could become more extreme, or almost disappear for a while, because the Moon is what keeps that tilt inside a narrow range.",
         },
       ],
       known: [
@@ -61,11 +69,16 @@ const SCENES = [
   },
   {
     patterns: [
-      /(nicht|kein|niemand|ohne|nie).{0,30}schlaf/,
-      /schlaf.{0,30}(nicht|kein|überflüssig|unnötig|müsste nicht)/,
+      /(nicht|kein|niemand|ohne|nie).{0,30}schl[aä]f/,
+      /schl[aä]f.{0,30}(nicht|kein|überflüssig|unnötig|müsste nicht)/,
       /(no|without|never).{0,20}sleep/,
       /sleep.{0,30}(unnecessary|no longer|not need)/,
     ],
+    near: [/schl[aä]f/, /\bsleep\b/],
+    written: {
+      de: "niemand mehr schlafen müsste",
+      en: "nobody had to sleep",
+    },
     de: {
       summary:
         "Schlaf ist keine Pause vom Leben, sondern Wartung. Müsste niemand mehr schlafen, fehlte nicht nur Müdigkeit. Es fehlte ein Zustand, in dem Erinnerung sortiert und der Körper repariert wird.",
@@ -126,6 +139,11 @@ const SCENES = [
       /internet.{0,30}(down|gone|fails|outage|stops|disappear)/,
       /(no|without) internet/,
     ],
+    near: [/\binternet\b/],
+    written: {
+      de: "das Internet morgen ausfällt",
+      en: "the internet failed tomorrow",
+    },
     de: {
       summary:
         "Das Internet ist kein einzelner Schalter. Es ist die Schicht unter Bezahlung, Fahrplänen, Karten und vielen Akten. Fällt es aus, bleiben Strom, Sprache und Straßen. Es fehlt der kurze Weg zu dem, was nicht im Raum ist.",
@@ -186,6 +204,11 @@ const SCENES = [
       /gravity.{0,30}(half|weaker|less|lower)/,
       /half.{0,20}gravity/,
     ],
+    near: [/schwerkraft/, /gravitation/, /\bgravity\b/],
+    written: {
+      de: "die Schwerkraft nur halb so stark wäre",
+      en: "gravity were only half as strong",
+    },
     de: {
       summary:
         "Halbe Schwerkraft heißt nicht halbes Leben. Das Gewicht wird leichter, Masse und Trägheit bleiben. Wer springt, kommt höher. Wer bremst, muss denselben Schwung noch loswerden.",
@@ -246,6 +269,11 @@ const SCENES = [
       /(nobody|no one|cannot|can't|could not).{0,20}lie/,
       /without (a )?lie/,
     ],
+    near: [/lüg/, /lueg/, /\blie\b/, /\blies\b/, /lying/, /\bwahrheit/, /\btruth\b/],
+    written: {
+      de: "niemand mehr lügen könnte",
+      en: "nobody could lie",
+    },
     de: {
       summary:
         "Wenn niemand mehr lügen könnte, verschwände nicht die Unklarheit. Es verschwände die bewusst falsche Aussage. Schweigen, Ausweichen und das Weglassen der Hälfte blieben möglich.",
@@ -305,6 +333,11 @@ const SCENES = [
       /(stillstand|stopp).{0,20}zeit/,
       /time.{0,30}(stop|freeze|stands still|stood still|stand still)/,
     ],
+    near: [/\bdie zeit\b/, /\btime\b/],
+    written: {
+      de: "die Zeit stehen bleibt",
+      en: "time stood still",
+    },
     de: {
       summary:
         "Wenn die Zeit für alles stehen bleibt, gibt es auch keinen nächsten Moment, in dem das jemand merkt. Eine anschauliche Antwort entsteht erst, wenn etwas weiterläuft: eine Person, das Licht oder eine Uhr.",
@@ -368,8 +401,8 @@ const LABELS = {
     known: "Was sich sagen lässt",
     open: "Was offen bleibt",
     check: "So prüft man die Frage",
-    unset: "Was der Satz nicht festlegt",
-    needs: "Was eine richtige Erklärung beantworten müsste",
+    settled: "Was gefunden wurde",
+    unset: "Was nicht gefunden wurde",
   },
   en: {
     checked: "Written for this question",
@@ -378,8 +411,8 @@ const LABELS = {
     known: "What we can say",
     open: "What stays open",
     check: "How to check the question",
-    unset: "What the sentence does not settle",
-    needs: "What a correct explanation would have to answer",
+    settled: "What was found",
+    unset: "What was not found",
   },
 };
 
@@ -407,7 +440,7 @@ export function explain(raw) {
     mark: scene ? labels.checked : labels.unchecked,
     labels: scene
       ? { unfold: labels.unfold, known: labels.known, open: labels.open }
-      : { unfold: labels.check, known: labels.unset, open: labels.needs },
+      : { unfold: labels.check, known: labels.settled, open: labels.unset },
     ...body,
   };
 }
@@ -459,63 +492,220 @@ function detectLang(text) {
   return (en?.length || 0) > (de?.length || 0) ? "en" : "de";
 }
 
+function word(body) {
+  return new RegExp(`(?<![\\p{L}\\p{N}_])(?:${body})(?![\\p{L}\\p{N}_])`, "u");
+}
+
+const BOUNDS = [
+  {
+    deShort: "für wen",
+    enShort: "who",
+    missing: { de: "Für wen es gilt.", en: "Who it applies to." },
+    hits: [
+      {
+        re: word("niemand|kein mensch|nobody|no one"),
+        de: "Für wen: niemand.",
+        en: "Who: nobody.",
+        deShort: "für wen (niemand)",
+        enShort: "who (nobody)",
+      },
+      {
+        re: word("alle|jeder|jede|everyone|everybody"),
+        de: "Für wen: alle.",
+        en: "Who: everyone.",
+        deShort: "für wen (alle)",
+        enShort: "who (everyone)",
+      },
+      {
+        re: word("wir|we"),
+        de: "Für wen: wir.",
+        en: "Who: we.",
+        deShort: "für wen (wir)",
+        enShort: "who (we)",
+      },
+      {
+        re: word("ich|i"),
+        de: "Für wen: ich.",
+        en: "Who: I.",
+        deShort: "für wen (ich)",
+        enShort: "who (I)",
+      },
+    ],
+  },
+  {
+    deShort: "ab wann",
+    enShort: "from when",
+    missing: { de: "Ab wann es gilt.", en: "From when it applies." },
+    hits: [
+      {
+        re: /über nacht|ueber nacht|overnight/,
+        de: "Ab wann: über Nacht.",
+        en: "From when: overnight.",
+        deShort: "ab wann (über Nacht)",
+        enShort: "from when (overnight)",
+      },
+      {
+        re: word("morgen|tomorrow"),
+        de: "Ab wann: morgen.",
+        en: "From when: tomorrow.",
+        deShort: "ab wann (morgen)",
+        enShort: "from when (tomorrow)",
+      },
+      {
+        re: word("sofort|plötzlich|ploetzlich|suddenly|at once"),
+        de: "Ab wann: sofort.",
+        en: "From when: at once.",
+        deShort: "ab wann (sofort)",
+        enShort: "from when (at once)",
+      },
+    ],
+  },
+  {
+    deShort: "wie lange",
+    enShort: "how long",
+    missing: { de: "Wie lange es gilt.", en: "How long it applies." },
+    hits: [
+      {
+        re: /für immer|fuer immer|forever|for good/,
+        de: "Wie lange: für immer.",
+        en: "How long: forever.",
+        deShort: "wie lange (für immer)",
+        enShort: "how long (forever)",
+      },
+      {
+        re: /einen monat|für einen monat|for a month|for one month/,
+        de: "Wie lange: einen Monat.",
+        en: "How long: one month.",
+        deShort: "wie lange (einen Monat)",
+        enShort: "how long (one month)",
+      },
+      {
+        re: /einen tag|für einen tag|for a day|for one day/,
+        de: "Wie lange: einen Tag.",
+        en: "How long: one day.",
+        deShort: "wie lange (einen Tag)",
+        enShort: "how long (one day)",
+      },
+      {
+        re: /eine nacht|for a night|for one night/,
+        de: "Wie lange: eine Nacht.",
+        en: "How long: one night.",
+        deShort: "wie lange (eine Nacht)",
+        enShort: "how long (one night)",
+      },
+    ],
+  },
+  {
+    deShort: "wo",
+    enShort: "where",
+    missing: { de: "Wo es gilt.", en: "Where it applies." },
+    hits: [
+      {
+        re: word("überall|ueberall|everywhere|weltweit|worldwide"),
+        de: "Wo: überall.",
+        en: "Where: everywhere.",
+        deShort: "wo (überall)",
+        enShort: "where (everywhere)",
+      },
+      {
+        re: /auf der erde|on earth/,
+        de: "Wo: auf der Erde.",
+        en: "Where: on Earth.",
+        deShort: "wo (auf der Erde)",
+        enShort: "where (on Earth)",
+      },
+      {
+        re: /nur hier|only here|an einem ort|in one place/,
+        de: "Wo: nur an einem Ort.",
+        en: "Where: only in one place.",
+        deShort: "wo (nur an einem Ort)",
+        enShort: "where (only in one place)",
+      },
+    ],
+  },
+];
+
 function compose(parsed) {
-  if (parsed.lang === "en") {
-    return {
-      summary: `There is no checked explanation for this question here. The notes below do not say what would happen. They show where an answer easily becomes false.`,
-      steps: [
-        {
-          when: "Wording",
-          text: `The sentence is: ${parsed.clause}. An explanation is only about this question if it means exactly that, not a similar one.`,
-        },
-        {
-          when: "Missing bounds",
-          text: "What is often missing is who it applies to, from when, and for how long. Without those three, one sentence describes several different situations.",
-        },
-        {
-          when: "Do not claim",
-          text: "What people do next, which rules appear, or how one case turns out does not follow from the sentence alone.",
-        },
-      ],
-      known: [
-        "Who exactly is meant.",
-        "Whether it starts at once or gradually.",
-        "Whether it holds everywhere or only in one place.",
-      ],
-      open: [
-        "Which direct effect already follows from the wording, with no new invention.",
-        "Which effect appears only because people, machines, or nature respond.",
-        "Which established fact the sentence contradicts, if it cannot happen as stated.",
-      ],
-    };
+  const nearby = SCENES.find((item) => item.near.some((pattern) => pattern.test(parsed.norm)));
+  const { found, missing } = readBounds(parsed.clause);
+  const english = parsed.lang === "en";
+  const steps = [
+    {
+      when: english ? "Wording" : "Wortlaut",
+      text: english
+        ? `The sentence is: ${parsed.clause}. An explanation is about this question only if it means exactly that.`
+        : `Der Satz lautet: ${parsed.clause}. Eine Erklärung trifft nur diese Frage, wenn sie genau das meint.`,
+    },
+  ];
+
+  if (nearby) {
+    steps.push({
+      when: english ? "Nearby question" : "Nachbarfrage",
+      text: english
+        ? `The written one is: ${nearby.written.en}. This one is: ${parsed.clause}.`
+        : `Geschrieben ist: ${nearby.written.de}. Gefragt ist hier: ${parsed.clause}.`,
+    });
   }
 
+  steps.push({
+    when: english ? "Bounds" : "Grenze",
+    text: boundsStep(found, missing, parsed.lang),
+  });
+
   return {
-    summary:
-      "Dazu gibt es hier keine geprüfte Erklärung. Die Punkte unten sagen nicht, was passieren würde. Sie zeigen, wo eine Antwort leicht falsch wird.",
-    steps: [
-      {
-        when: "Wortlaut",
-        text: `Der Satz lautet: ${parsed.clause}. Eine Erklärung trifft nur diese Frage, wenn sie genau das meint und nicht eine ähnliche.`,
-      },
-      {
-        when: "Fehlende Grenze",
-        text: "Oft fehlt, für wen es gilt, ab wann, und wie lange. Ohne diese drei Angaben beschreibt ein Satz mehrere verschiedene Lagen.",
-      },
-      {
-        when: "Nicht behaupten",
-        text: "Was Menschen danach tun, welche Regeln entstehen oder wie ein Einzelfall ausgeht, folgt nicht aus dem Satz allein.",
-      },
-    ],
-    known: [
-      "Wer genau gemeint ist.",
-      "Ob es sofort gilt oder nach und nach.",
-      "Ob es überall gilt oder nur an einem Ort.",
-    ],
-    open: [
-      "Welche direkte Folge schon aus dem Wortlaut kommt, ohne eine neue Erfindung.",
-      "Welche Folge erst entsteht, weil Menschen, Technik oder Natur darauf antworten.",
-      "Welcher bekannten Tatsache der Satz widerspricht, falls er so nicht möglich ist.",
-    ],
+    summary: english
+      ? "There is no checked explanation for this question here. The notes below do not say what would happen. They show which bound is found in this sentence, and which is not."
+      : "Dazu gibt es hier keine geprüfte Erklärung. Die Punkte unten sagen nicht, was passieren würde. Sie zeigen, welche Grenze in diesem Satz zu finden ist und welche nicht.",
+    neighbor: nearby ? neighborLine(nearby, parsed.lang) : undefined,
+    steps,
+    known: found.length
+      ? found.map((hit) => hit[parsed.lang])
+      : [
+          english
+            ? "None of the four bounds: who, from when, how long, where."
+            : "Keine der vier Grenzen: für wen, ab wann, wie lange, wo.",
+        ],
+    open: missing.length
+      ? missing.map((bound) => bound.missing[parsed.lang])
+      : [
+          english
+            ? "The four bounds are found. Still open is which direct effect follows from this wording, and which established fact the sentence contradicts if it cannot happen as stated."
+            : "Die vier Grenzen sind gefunden. Offen bleibt, welche direkte Folge aus diesem Wortlaut folgt, und welcher bekannten Tatsache der Satz widerspricht, falls er so nicht möglich ist.",
+        ],
   };
+}
+
+function readBounds(clause) {
+  const haystack = clause.toLowerCase();
+  const found = [];
+  const missing = [];
+  for (const bound of BOUNDS) {
+    const hit = bound.hits.find((item) => item.re.test(haystack));
+    if (hit) found.push(hit);
+    else missing.push(bound);
+  }
+  return { found, missing };
+}
+
+function boundsStep(found, missing, lang) {
+  const english = lang === "en";
+  const foundText = found.length
+    ? english
+      ? `Found: ${found.map((hit) => hit.enShort).join(", ")}.`
+      : `Gefunden: ${found.map((hit) => hit.deShort).join(", ")}.`
+    : english
+      ? "Found: none of the four bounds."
+      : "Gefunden: keine der vier Grenzen.";
+  if (missing.length === 0) return foundText;
+  const missingText = english
+    ? `Not found: ${missing.map((bound) => bound.enShort).join(", ")}.`
+    : `Nicht gefunden: ${missing.map((bound) => bound.deShort).join(", ")}.`;
+  return `${foundText} ${missingText}`;
+}
+
+function neighborLine(scene, lang) {
+  if (lang === "en") {
+    return `Nearby is the written question “What if ${scene.written.en}?”.`;
+  }
+  return `In der Nähe liegt die geschriebene Frage „Was wäre, wenn ${scene.written.de}?“.`;
 }
