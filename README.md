@@ -1,6 +1,8 @@
 # What-if...
 
-Stell eine Frage hinter **What if**. Die Seite erklärt, was direkt folgen würde, was sich einigermaßen sicher sagen lässt, und was offen bleibt.
+Stell eine Frage hinter **What if**.
+
+Fragen aus der Liste haben eine Erklärung, die für genau diesen Fall geschrieben ist. Für alle anderen sagt die Seite, dass sie keine geprüfte Erklärung hat, und zeigt nur, wo eine Antwort leicht falsch wird. Sie erfindet dann keine Fakten.
 
 Die Erklärung läuft im Browser. Die Frage wird dabei nicht an einen Dienst geschickt.
 

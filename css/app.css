@@ -166,6 +166,27 @@ button:focus-visible,
   animation: rise 360ms ease;
 }
 
+.mark {
+  display: inline-block;
+  margin: 0 0 14px;
+  padding: 5px 10px;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  font-weight: 520;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.mark-checked {
+  color: #1f4d2c;
+  background: #e3efe4;
+}
+
+.mark-open {
+  color: var(--accent);
+  background: #f4e0d2;
+}
+
 .answer h2 {
   margin: 0;
   font-family: var(--serif);

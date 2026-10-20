@@ -50,6 +50,10 @@ function renderAnswer(result) {
   answer.hidden = false;
   answer.replaceChildren();
 
+  const mark = document.createElement("p");
+  mark.className = result.checked ? "mark mark-checked" : "mark mark-open";
+  mark.textContent = result.mark;
+
   const title = document.createElement("h2");
   title.textContent = result.title;
 
@@ -77,7 +81,7 @@ function renderAnswer(result) {
   columns.className = "columns";
   columns.append(renderList(result.labels.known, result.known), renderList(result.labels.open, result.open));
 
-  answer.append(title, summary, unfoldLabel, steps, columns);
+  answer.append(mark, title, summary, unfoldLabel, steps, columns);
 }
 
 function renderList(label, items) {

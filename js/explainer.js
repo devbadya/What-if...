@@ -360,291 +360,26 @@ const SCENES = [
   },
 ];
 
-const DOMAINS = [
-  {
-    id: "space",
-    test: /mond|moon|sonne|sun|stern|star|planet|erde\b|earth|galax|orbit|weltall|space|mars|schwarzes loch|black hole|komet|comet|universum|universe/,
-    de: {
-      later:
-        "Bahnen, Gezeiten und Licht hängen an Masse und Entfernung. Was am Himmel anders wird, ändert oft zuerst die Nacht und erst viel später den Kalender.",
-      lasting:
-        "Über lange Zeit zählt, ob die Erdachse, die Bahn und das Licht noch in dem Bereich bleiben, für den Leben und Jahreszeiten gebaut sind.",
-      known: [
-        "Licht braucht Zeit. Was weit entfernt passiert, sehen wir später.",
-        "Gezeiten, Jahreszeiten und Umlaufbahnen folgen aus Masse und Bewegung.",
-      ],
-      open: "Wie stark die Bahn der Erde nachgibt, lässt sich ohne Massen und Abstände nicht seriös beziffern.",
-    },
-    en: {
-      later:
-        "Orbits, tides, and light depend on mass and distance. A change in the sky often alters the night first, and the calendar only much later.",
-      lasting:
-        "Over a long time, what matters is whether Earth's tilt, orbit, and light stay inside the range that life and seasons are built for.",
-      known: [
-        "Light takes time. What happens far away is seen later.",
-        "Tides, seasons, and orbits follow from mass and motion.",
-      ],
-      open: "How much Earth's path would give way cannot be numbered honestly without masses and distances.",
-    },
-  },
-  {
-    id: "physics",
-    test: /schwerkraft|gravitation|gravity|zeit|time|licht|light|geschwindigkeit|speed of light|energie|energy|atom|quant|vakuum|vacuum|temperatur|hitze|kälte|\bcold\b|\bheat\b|reibung|friction/,
-    de: {
-      later:
-        "Geräte, Gebäude und Uhren sind auf die heutigen Werte geeicht. Stimmt Kraft, Licht oder Dauer nicht mehr, fallen zuerst die Stellen auf, an denen der Alltag eine bestimmte Zahl erwartet.",
-      lasting:
-        "Auf Dauer prüft man die Lage an Erhaltung und Gleichgewicht. Was leichter, schneller oder heißer wirkt, hat oft eine Rechnung, die an einer anderen Stelle teurer wird.",
-      known: [
-        "Masse und Gewicht sind nicht dasselbe. Dieser Unterschied fängt viele falsche ersten Folgen ab.",
-        "Alltagsgeräte sind auf heutige Werte gebaut: Uhren, Bremsen, Thermometer, tragende Wände.",
-      ],
-      open: "Ob die Änderung nur hier gilt oder überall, steht oft nicht in der Frage. Daran hängt die Antwort.",
-    },
-    en: {
-      later:
-        "Tools, buildings, and clocks are calibrated to today's values. If force, light, or duration no longer match, the first failures appear where daily life expects a specific number.",
-      lasting:
-        "Over time, the situation is tested against conservation and balance. What feels lighter, faster, or hotter often costs more somewhere else in the account.",
-      known: [
-        "Mass and weight are not the same. That distinction catches a lot of wrong first consequences.",
-        "Ordinary tools are built for today's values: clocks, brakes, thermometers, load-bearing walls.",
-      ],
-      open: "The question often fails to say whether the change holds only here or everywhere. The answer depends on that.",
-    },
-  },
-  {
-    id: "body",
-    test: /schlaf|sleep|körper|body|altern|aging|sterben|death|unsichtbar|invisible|flieg|fly\b|atmen|breath|essen|food|hunger|krankheit|krank|auge|eye|gedächtnis|memory|haut|skin/,
-    de: {
-      later:
-        "Der Körper rechnet weiter mit Energie, Temperatur und Erholung. Eine neue Fähigkeit streicht diese Rechnung nicht. Sie verschiebt nur, wo die Kosten auftauchen.",
-      lasting:
-        "Arbeit, Sport und Medizin sind um die heutigen Grenzen gebaut. Wird eine Grenze verschoben, werden alte Schutzregeln lückenhaft, noch bevor ein neues Gesetz das merkt.",
-      known: [
-        "Der Körper braucht Energie, einen temperierten Rahmen und Pausen. Das bleibt die enge Grenze.",
-        "Menschen sind sehr verschieden. Was theoretisch alle können, wird ungleich genutzt.",
-      ],
-      open: "Welche Nebenwirkung der Körper mitträgt, sagt eine reine Was-wäre-wenn-Frage nicht.",
-    },
-    en: {
-      later:
-        "The body still has to balance energy, temperature, and recovery. A new ability does not erase that account. It moves where the cost shows up.",
-      lasting:
-        "Work, sport, and medicine are built around today's limits. Move a limit, and old safety rules develop gaps before any new law notices.",
-      known: [
-        "The body needs energy, a livable temperature, and pauses. That remains the tight constraint.",
-        "People differ a lot. An ability that everyone theoretically has is still used unequally.",
-      ],
-      open: "A pure what-if does not say which side effect the body would carry.",
-    },
-  },
-  {
-    id: "tech",
-    test: /internet|strom|electric|handy|smartphone|phone|computer|robot|software|daten|data|akku|battery|satellit|satellite|gps|netz\b/,
-    de: {
-      later:
-        "Netze wirken unsichtbar, bis Zahlung, Karte, Nachricht oder Akte sie brauchen. Der Ausweichweg ist dann Bargeld, Papier, Radio oder ein Gespräch im Raum.",
-      lasting:
-        "Nach einer Störung kehrt Technik selten in genau denselben Zustand zurück. Manche Umwege bleiben, weil sie sich als weniger verletzlich gezeigt haben.",
-      known: [
-        "Digitale Dienste brauchen Strom, Leitungen und Menschen, die sie betreiben.",
-        "Wissen liegt auch außerhalb des Netzes: in Köpfen, auf Papier, in Geräten ohne Verbindung.",
-      ],
-      open: "Welche Dienste einen Notbetrieb haben, ist von Ort zu Ort verschieden.",
-    },
-    en: {
-      later:
-        "Networks feel invisible until payment, maps, messages, or records need them. The backup is then cash, paper, radio, or a conversation in the room.",
-      lasting:
-        "After a disruption, technology rarely returns to exactly the same state. Some detours remain, because they proved less fragile.",
-      known: [
-        "Digital services need power, lines, and people to run them.",
-        "Knowledge also lives outside the network: in memory, on paper, on devices with no connection.",
-      ],
-      open: "Which services have a fallback differs from place to place.",
-    },
-  },
-  {
-    id: "society",
-    test: /geld|money|krieg|war\b|arbeit|work\b|schule|school|gesetz|law\b|regierung|government|sprache|language|grenze|border|steuer|tax|wahl|election|polizei|police/,
-    de: {
-      later:
-        "Verträge, Höflichkeit und Strafe rechnen mit der heutigen Lage. Ändert sich, was Menschen können oder verbergen, wackeln diese Regeln noch am selben Tag.",
-      lasting:
-        "Macht wandert dorthin, wo die neue Lage einen Vorteil lässt. Das kann Wissen sein, Kraft, Geld oder das Recht, die Frage zu stellen.",
-      known: [
-        "Regeln entstehen, weil Menschen sich nicht alles sehen und nicht vollständig vertrauen.",
-        "Eine Lage, die alle betrifft, trifft nicht alle mit derselben Härte.",
-      ],
-      open: "Ob die Lage gerechter wird, entscheiden Macht und Gesetze, nicht die Frage allein.",
-    },
-    en: {
-      later:
-        "Contracts, politeness, and punishment assume today's situation. If what people can do or hide changes, those rules wobble on the same day.",
-      lasting:
-        "Power moves toward whatever the new situation advantages. That can be knowledge, force, money, or the right to ask the question.",
-      known: [
-        "Rules exist because people cannot see everything and do not fully trust one another.",
-        "A situation that touches everyone still does not hit everyone with the same force.",
-      ],
-      open: "Whether the situation becomes fairer is settled by power and law, not by the question alone.",
-    },
-  },
-  {
-    id: "nature",
-    test: /meer|ozean|ocean|tier|animal|hund|dog|katze|cat\b|wald|forest|wetter|weather|eis\b|ice\b|dinosaur|regen|rain|wasser|water|biene|bee|pflanze|plant|vogel|bird|fisch|fish/,
-    de: {
-      later:
-        "Tiere, Pflanzen und Wasser folgen Nahrung, Temperatur und Wegen. Dort zeigt sich eine neue Lage zuerst, nicht in der Schlagzeile.",
-      lasting:
-        "Städte, Äcker und Ufer sind für die heutige Landschaft gebaut. Nach einem Jahr steht noch, was nicht allein auf dem alten Gleichgewicht lag.",
-      known: [
-        "Leben hängt an Wasser, Temperatur und Energie. Das bleibt die enge Grenze.",
-        "Ein Gleichgewicht kippt ungleichmäßig. Manche Arten weichen aus, andere haben keinen Weg.",
-      ],
-      open: "Wie schnell sich ein neues Gleichgewicht bildet, hängt an der konkreten Landschaft.",
-    },
-    en: {
-      later:
-        "Animals, plants, and water follow food, temperature, and paths. A new situation shows up there first, not in the headline.",
-      lasting:
-        "Cities, fields, and shores are built for today's landscape. After a year, what remains is whatever did not depend only on the old balance.",
-      known: [
-        "Life depends on water, temperature, and energy. That stays the tight limit.",
-        "A balance tips unevenly. Some species can move. Others have no path.",
-      ],
-      open: "How fast a new balance forms depends on the particular landscape.",
-    },
-  },
-];
-
-const CHANGES = {
-  de: {
-    absence: {
-      summary: (title) =>
-        `${title} Dann fehlt etwas, das heute still mitläuft. Zuerst wird sichtbar, was ohne es nicht mehr geht.`,
-      now: (clause) =>
-        `Sobald ${clause}, fällt zuerst auf, was unmittelbar daran hängt. Der größere Zusammenhang wird erst danach klar.`,
-      open: "Wie schnell ein Ersatz entsteht, hängt davon ab, ob das Fehlende nur bequem war oder ob etwas Notwendiges daran hing.",
-    },
-    scale: {
-      summary: (title) =>
-        `${title} Dann stimmt die Stärke nicht mehr, die Gewohnheit und Geräte erwarten. Die Art der Dinge bleibt erst einmal dieselbe.`,
-      now: (clause) =>
-        `Sobald ${clause}, fühlen sich vertraute Handlungen falsch an. Kraft, Höhe, Dauer oder Menge passen nicht mehr zu dem, was gebaut wurde.`,
-      open: "Halb oder doppelt klingt nach einer einfachen Rechnung. Ob Körper, Klima und Technik linear mitziehen, ist oft der unsichere Teil.",
-    },
-    sudden: {
-      summary: (title) =>
-        `${title} Dann fehlt die Zeit, in der man sich sonst vorbereitet. Der erste Tag zeigt Abhängigkeiten, die im Normalfall unsichtbar sind.`,
-      now: (clause) =>
-        `Wenn es schnell soweit ist und ${clause}, bleibt wenig Spielraum für Ersatz. Menschen nehmen, was schon im Raum ist.`,
-      open: "Ob die Lage einen Tag oder ein Jahr dauert, sind zwei verschiedene Welten.",
-    },
-    ability: {
-      summary: (title) =>
-        `${title} Dann käme eine Möglichkeit dazu, mit der der heutige Alltag nicht rechnet. Zuerst wird sie ausprobiert. Danach wird sie gewöhnlich.`,
-      now: (clause) =>
-        `Sobald ${clause}, ändert sich zuerst das Verhalten derer, die es unmittelbar können. Am Anfang ist diese Möglichkeit ungleich verteilt.`,
-      open: "Ob die neue Möglichkeit eine Grenze braucht, zeigt sich an Unfällen und an denen, die sie nicht nutzen wollen.",
-    },
-    universal: {
-      summary: (title) =>
-        `${title} Dann hält kaum noch jemand die alte Lage für die anderen bereit. Unterschiedlich ist, wie nah jemand an den Folgen sitzt.`,
-      now: (clause) =>
-        `Wenn das allgemein gilt und ${clause}, gibt es keinen Außenstehenden, der das Alte noch anbietet. Der Unterschied liegt in der Härte, nicht in der Tatsache.`,
-      open: "„Alle“ ist selten wörtlich. Kinder, Tiere, Technik oder Menschen an einem anderen Ort können außen vor bleiben.",
-    },
-    general: {
-      summary: (title) =>
-        `${title} Daraus folgt eine enge Wirkung sofort, und eine weite Wirkung erst durch das, was Menschen danach tun.`,
-      now: (clause) =>
-        `Nimmt man ernst, dass ${clause}, ist die erste Folge die, die auch ohne neues Gesetz und ohne neue Erfindung eintritt.`,
-      open: "Die Frage sagt oft nicht, für wen die Lage gilt und wie lange sie bleibt.",
-    },
-  },
-  en: {
-    absence: {
-      summary: (title) =>
-        `${title} Then a background effect would be missing. The first thing to become visible is what no longer works without it.`,
-      now: (clause) =>
-        `As soon as ${clause}, the first thing people notice is what depends on it directly. The larger connection becomes clear only after that.`,
-      open: "How fast a replacement appears depends on whether the missing thing was only convenient, or whether something necessary depended on it.",
-    },
-    scale: {
-      summary: (title) =>
-        `${title} Then the strength that habit and tools expect would be wrong. The kind of thing would stay the same at first.`,
-      now: (clause) =>
-        `As soon as ${clause}, familiar actions would feel wrong. Force, height, duration, or amount would no longer match what was built.`,
-      open: "Half or double sounds like simple arithmetic. Whether bodies, climate, and machines follow in a straight line is often the uncertain part.",
-    },
-    sudden: {
-      summary: (title) =>
-        `${title} Then the time people normally use to prepare would be missing. The first day shows dependencies that are invisible in ordinary life.`,
-      now: (clause) =>
-        `If it happens quickly and ${clause}, there is little room for a substitute. People use what is already in the room.`,
-      open: "Whether it lasts a day or a year makes two different worlds.",
-    },
-    ability: {
-      summary: (title) =>
-        `${title} Then there would be a possibility that streets, rules, and bodies were not built for. First people try it. Then it becomes ordinary.`,
-      now: (clause) =>
-        `As soon as ${clause}, the people with least to lose try it first. At the beginning the possibility is unevenly spread.`,
-      open: "Whether the new possibility needs a limit shows up in accidents, and in the people who do not want to use it.",
-    },
-    universal: {
-      summary: (title) =>
-        `${title} Then almost nobody would still be keeping the old situation available for others. What differs is how close someone sits to the consequences.`,
-      now: (clause) =>
-        `If it holds generally and ${clause}, there is no outsider still offering the old way. The difference is in the severity, not in the fact.`,
-      open: "“Everyone” is rarely literal. Children, animals, machines, or people somewhere else can sit outside it.",
-    },
-    general: {
-      summary: (title) =>
-        `${title} A narrow effect follows at once. A wide effect follows only through what people do next.`,
-      now: (clause) =>
-        `If we take seriously that ${clause}, the first consequence is the one that happens with no new law and no new invention.`,
-      open: "The question often does not say who the situation applies to, or how long it lasts.",
-    },
-  },
-};
-
 const LABELS = {
   de: {
+    checked: "Für diese Frage geschrieben",
+    unchecked: "Ungeprüft",
     unfold: "So läuft es ab",
     known: "Was sich sagen lässt",
     open: "Was offen bleibt",
+    check: "So prüft man die Frage",
+    unset: "Was der Satz nicht festlegt",
+    needs: "Was eine richtige Erklärung beantworten müsste",
   },
   en: {
+    checked: "Written for this question",
+    unchecked: "Unchecked",
     unfold: "How it would unfold",
     known: "What we can say",
     open: "What stays open",
-  },
-};
-
-const GENERAL = {
-  de: {
-    later:
-      "Danach handeln Menschen, Märkte und Behörden auf diese erste Folge. An dieser Antwort hängt, ob die Lage ein kurzes Staunen bleibt oder ein neuer Rahmen wird.",
-    lasting:
-      "Auf Dauer setzt sich durch, was auch ohne Aufregung noch funktioniert. Das ist selten die spektakulärste Version vom ersten Tag.",
-    known: [
-      "Die direkte Folge tritt auch ohne neues Gesetz und ohne neue Erfindung ein.",
-      "Spätere Folgen hängen daran, wie Menschen auf diese direkte Folge antworten.",
-    ],
-    open: "Mehrere ruhige Antworten können gleichzeitig ernst gemeint sein.",
-  },
-  en: {
-    later:
-      "After that, people, markets, and institutions answer the first effect. That response decides whether the situation stays a brief shock or becomes a new frame.",
-    lasting:
-      "Over time, what remains is whatever still works when the excitement is gone. That is rarely the most spectacular version from day one.",
-    known: [
-      "The direct effect happens with no new law and no new invention.",
-      "Later effects depend on how people answer that direct effect.",
-    ],
-    open: "Several calm answers can be serious at the same time.",
+    check: "How to check the question",
+    unset: "What the sentence does not settle",
+    needs: "What a correct explanation would have to answer",
   },
 };
 
@@ -662,12 +397,17 @@ export function explain(raw) {
   if (!parsed) return null;
 
   const scene = SCENES.find((item) => item.patterns.some((pattern) => pattern.test(parsed.norm)));
+  const labels = LABELS[parsed.lang];
   const body = scene ? scene[parsed.lang] : compose(parsed);
 
   return {
     lang: parsed.lang,
     title: parsed.title,
-    labels: LABELS[parsed.lang],
+    checked: Boolean(scene),
+    mark: scene ? labels.checked : labels.unchecked,
+    labels: scene
+      ? { unfold: labels.unfold, known: labels.known, open: labels.open }
+      : { unfold: labels.check, known: labels.unset, open: labels.needs },
     ...body,
   };
 }
@@ -719,69 +459,63 @@ function detectLang(text) {
   return (en?.length || 0) > (de?.length || 0) ? "en" : "de";
 }
 
-function detectChange(norm) {
-  if (/(verschwind|weg\b|ohne|ausf[aä]ll|ausfall|nicht mehr|gibt es kein|austrock|trocken|versieg|no longer|disappear|vanish|gone|without|fails|went away|dr(y|ies|ied))/.test(norm)) {
-    return "absence";
-  }
-  if (/(halb|hälfte|doppelt|größer|kleiner|half|double|twice|bigger|smaller)/.test(norm)) {
-    return "scale";
-  }
-  if (/(plötzlich|über nacht|morgen|suddenly|overnight|tomorrow)/.test(norm)) {
-    return "sudden";
-  }
-  if (/(könnte|könnten|können|fähig|could|able to)/.test(norm)) {
-    return "ability";
-  }
-  if (/(alle |allem |niemand|jeder|everyone|nobody|no one|all people)/.test(norm)) {
-    return "universal";
-  }
-  return "general";
-}
-
-const NATURE_ABILITY = {
-  de: {
-    later:
-      "Zuerst ändert sich der Umgang. Eine neue Fähigkeit bei Tieren wirft die Frage auf, wer sie versteht, fürchtet oder für sich nutzt.",
-    lasting:
-      "Auf Dauer müssten Haltung, Städte und Gesetze neu bestimmen, was ein Tier tun darf, wenn es plötzlich handeln oder sprechen kann.",
-    known: [
-      "Tiere folgen Nahrung, Angst und Bindung. Eine neue Fähigkeit legt sich darüber, sie ersetzt diesen Antrieb nicht.",
-      "Menschen deuten Tierverhalten schon heute oft falsch. Mit einer neuen Fähigkeit wird diese Deutung folgenreicher.",
-    ],
-    open: "Ob die Fähigkeit bei jedem Tier gleich stark wäre, sagt die Frage nicht.",
-  },
-  en: {
-    later:
-      "The first change is how the two sides deal with each other. A new animal ability raises the question of who understands it, fears it, or uses it.",
-    lasting:
-      "Over time, keeping animals, cities, and laws would have to say what an animal may do once it can act or speak.",
-    known: [
-      "Animals still follow food, fear, and attachment. A new ability sits on top of those drives. It does not replace them.",
-      "People already misread animal behavior. With a new ability, that reading would matter more.",
-    ],
-    open: "The question does not say whether every animal would have the ability to the same degree.",
-  },
-};
-
 function compose(parsed) {
-  const change = detectChange(parsed.norm);
-  const domain = DOMAINS.find((item) => item.test.test(parsed.norm));
-  const pack = CHANGES[parsed.lang][change];
-  const topic =
-    domain?.id === "nature" && change === "ability"
-      ? NATURE_ABILITY[parsed.lang]
-      : domain
-        ? domain[parsed.lang]
-        : GENERAL[parsed.lang];
+  if (parsed.lang === "en") {
+    return {
+      summary: `There is no checked explanation for this question here. The notes below do not say what would happen. They show where an answer easily becomes false.`,
+      steps: [
+        {
+          when: "Wording",
+          text: `The sentence is: ${parsed.clause}. An explanation is only about this question if it means exactly that, not a similar one.`,
+        },
+        {
+          when: "Missing bounds",
+          text: "What is often missing is who it applies to, from when, and for how long. Without those three, one sentence describes several different situations.",
+        },
+        {
+          when: "Do not claim",
+          text: "What people do next, which rules appear, or how one case turns out does not follow from the sentence alone.",
+        },
+      ],
+      known: [
+        "Who exactly is meant.",
+        "Whether it starts at once or gradually.",
+        "Whether it holds everywhere or only in one place.",
+      ],
+      open: [
+        "Which direct effect already follows from the wording, with no new invention.",
+        "Which effect appears only because people, machines, or nature respond.",
+        "Which established fact the sentence contradicts, if it cannot happen as stated.",
+      ],
+    };
+  }
 
   return {
-    summary: pack.summary(parsed.title),
+    summary:
+      "Dazu gibt es hier keine geprüfte Erklärung. Die Punkte unten sagen nicht, was passieren würde. Sie zeigen, wo eine Antwort leicht falsch wird.",
     steps: [
-      { when: parsed.lang === "en" ? "At once" : "Sofort", text: pack.now(parsed.clause) },
-      { when: parsed.lang === "en" ? "After that" : "Danach", text: topic.later },
-      { when: parsed.lang === "en" ? "Over time" : "Auf Dauer", text: topic.lasting },
+      {
+        when: "Wortlaut",
+        text: `Der Satz lautet: ${parsed.clause}. Eine Erklärung trifft nur diese Frage, wenn sie genau das meint und nicht eine ähnliche.`,
+      },
+      {
+        when: "Fehlende Grenze",
+        text: "Oft fehlt, für wen es gilt, ab wann, und wie lange. Ohne diese drei Angaben beschreibt ein Satz mehrere verschiedene Lagen.",
+      },
+      {
+        when: "Nicht behaupten",
+        text: "Was Menschen danach tun, welche Regeln entstehen oder wie ein Einzelfall ausgeht, folgt nicht aus dem Satz allein.",
+      },
     ],
-    known: topic.known,
-    open: [topic.open, pack.open],
+    known: [
+      "Wer genau gemeint ist.",
+      "Ob es sofort gilt oder nach und nach.",
+      "Ob es überall gilt oder nur an einem Ort.",
+    ],
+    open: [
+      "Welche direkte Folge schon aus dem Wortlaut kommt, ohne eine neue Erfindung.",
+      "Welche Folge erst entsteht, weil Menschen, Technik oder Natur darauf antworten.",
+      "Welcher bekannten Tatsache der Satz widerspricht, falls er so nicht möglich ist.",
+    ],
   };
 }
