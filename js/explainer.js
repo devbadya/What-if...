@@ -660,11 +660,7 @@ function compose(parsed) {
     steps,
     known: found.length
       ? found.map((hit) => hit[parsed.lang])
-      : [
-          english
-            ? "None of the four bounds: who, from when, how long, where."
-            : "Keine der vier Grenzen: für wen, ab wann, wie lange, wo.",
-        ],
+      : [english ? "None of the four bounds." : "Keine der vier Grenzen."],
     open: missing.length
       ? missing.map((bound) => bound.missing[parsed.lang])
       : [

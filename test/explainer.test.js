@@ -72,6 +72,8 @@ describe("unchecked questions", () => {
   it("differs when two sentences settle different bounds", () => {
     const bare = explain("die Bienen verschwinden");
     const timed = explain("die Bienen verschwinden über Nacht");
+    assert.deepEqual(bare.known, ["Keine der vier Grenzen."]);
+    assert.equal(bare.open.length, 4);
     assert.notDeepEqual(bare.known, timed.known);
     assert.notDeepEqual(bare.open, timed.open);
   });
