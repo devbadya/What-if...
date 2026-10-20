@@ -11,3 +11,11 @@ python3 -m http.server 4173
 ```
 
 Dann `http://localhost:4173` öffnen.
+
+## Öffentliche Seite
+
+GitHub Pages liest die Dateien aus dem Branch `master`, Ordner `/`. Die Adresse ist danach:
+
+https://devbadya.github.io/What-if.../
+
+Einschalten: [Settings → Pages](https://github.com/devbadya/What-if.../settings/pages) → Branch `master` → `/ (root)` → Save.
