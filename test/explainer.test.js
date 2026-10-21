@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import { describe, it } from "node:test";
-import { examples, explain } from "../js/explainer.js";
+import { examples, explain, questionsFor, suggestions } from "../js/explainer.js";
 
 const essayMarks = [
   ["der Mond wird doppelt so groß", /Gezeiten|Erdachse|Jahrtausende/],
@@ -60,7 +60,7 @@ describe("the moon explanation", () => {
 
 describe("unchecked questions", () => {
   it("keeps a bound that the sentence already states", () => {
-    const result = explain("die Bienen verschwinden über Nacht");
+    const result = explain("die Briefkästen verschwinden über Nacht");
     assert.equal(result.checked, false);
     assert.equal(result.neighbor, undefined);
     assert.match(result.message, /ungeprüft/);
@@ -73,8 +73,8 @@ describe("unchecked questions", () => {
   });
 
   it("differs when two sentences settle different bounds", () => {
-    const bare = explain("die Bienen verschwinden");
-    const timed = explain("die Bienen verschwinden über Nacht");
+    const bare = explain("die Briefkästen verschwinden");
+    const timed = explain("die Briefkästen verschwinden über Nacht");
     assert.deepEqual(bare.known, ["Keine der vier Grenzen."]);
     assert.equal(bare.open.length, 4);
     assert.notDeepEqual(bare.known, timed.known);
@@ -82,14 +82,14 @@ describe("unchecked questions", () => {
   });
 
   it("stops listing bounds once all four are found", () => {
-    const result = explain("alle überall für immer sofort fliegen könnten");
+    const result = explain("alle überall für immer sofort tanzen könnten");
     assert.equal(result.known.length, 4);
     assert.equal(result.open.length, 1);
     assert.match(result.open[0], /vier Grenzen sind gefunden/);
   });
 
   it("reads the same bounds in English", () => {
-    const result = explain("what if the bees vanished overnight");
+    const result = explain("what if the mailboxes vanished overnight");
     assert.equal(result.lang, "en");
     assert.equal(result.checked, false);
     assert.ok(result.known.some((item) => item.includes("overnight")));
@@ -121,6 +121,17 @@ describe("unchecked questions", () => {
     assert.equal(result.suggestion, "the Moon disappeared overnight");
     assert.match(result.neighbor, /the Moon disappeared overnight/);
     assert.doesNotMatch(result.summary, /tide/i);
+  });
+
+  it("keeps a written question for the bees", () => {
+    const result = explain("die Bienen verschwinden");
+    assert.equal(result.checked, true);
+    assert.match(result.summary, /Bestäubung/);
+  });
+
+  it("suggests a written question from a fragment", () => {
+    assert.ok(suggestions("bienen").includes("die Bienen verschwinden"));
+    assert.equal(questionsFor("alle").length, 40);
   });
 
   it("rejects a question that is too short", () => {

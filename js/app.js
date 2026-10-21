@@ -1,4 +1,4 @@
-import { examples, explain } from "./explainer.js";
+import { examples, explain, questionsFor, suggestions, topics } from "./explainer.js";
 
 const form = document.querySelector("#ask");
 const input = document.querySelector("#question");
@@ -6,15 +6,27 @@ const examplesRoot = document.querySelector("#examples");
 const answer = document.querySelector("#answer");
 const hint = document.querySelector("#hint");
 const historyRoot = document.querySelector("#history");
+const suggestRoot = document.querySelector("#suggest");
+const topicsRoot = document.querySelector("#topics");
+const catalogRoot = document.querySelector("#catalog");
 
 const HISTORY_KEY = "what-if-history";
+let activeTopic = "alle";
 
 renderExamples();
+renderTopics();
+renderCatalog();
 renderHistory(loadHistory());
 
 form.addEventListener("submit", (event) => {
   event.preventDefault();
   ask(input.value);
+});
+
+input.addEventListener("input", () => {
+  hint.hidden = true;
+  renderSuggest();
+  renderCatalog();
 });
 
 function renderExamples() {
@@ -29,6 +41,106 @@ function renderExamples() {
     });
     examplesRoot.append(button);
   }
+}
+
+function renderTopics() {
+  topicsRoot.replaceChildren();
+  for (const topic of topics) {
+    const button = document.createElement("button");
+    button.type = "button";
+    button.className = topic.id === activeTopic ? "topic is-on" : "topic";
+    button.textContent = topic.label;
+    button.setAttribute("aria-pressed", String(topic.id === activeTopic));
+    button.addEventListener("click", () => {
+      activeTopic = topic.id;
+      renderTopics();
+      renderCatalog();
+    });
+    topicsRoot.append(button);
+  }
+}
+
+function renderSuggest() {
+  const typed = input.value.trim().toLowerCase();
+  const found = suggestions(input.value).filter((ask) => ask.toLowerCase() !== typed);
+  suggestRoot.replaceChildren();
+  if (found.length === 0) {
+    suggestRoot.hidden = true;
+    return;
+  }
+
+  suggestRoot.hidden = false;
+  const label = document.createElement("p");
+  label.className = "group-label";
+  label.textContent = "Meintest du";
+  const row = document.createElement("div");
+  row.className = "chips";
+  for (const askText of found) {
+    const button = document.createElement("button");
+    button.type = "button";
+    button.className = "chip";
+    button.textContent = askText;
+    button.addEventListener("click", () => {
+      input.value = askText;
+      ask(askText);
+    });
+    row.append(button);
+  }
+  suggestRoot.append(label, row);
+}
+
+function renderCatalog() {
+  const query = input.value.trim().toLowerCase();
+  const searching = query.length >= 2;
+  const hinted = searching ? new Set(suggestions(query, 40)) : null;
+  const list = questionsFor(searching ? "alle" : activeTopic).filter((item) => {
+    if (!hinted) return true;
+    return item.ask.toLowerCase().includes(query) || hinted.has(item.ask);
+  });
+
+  catalogRoot.replaceChildren();
+  if (list.length === 0) {
+    const empty = document.createElement("p");
+    empty.className = "lede";
+    empty.textContent = "Keine geschriebene Frage dazu.";
+    catalogRoot.append(empty);
+    return;
+  }
+
+  const label = document.createElement("p");
+  label.className = "group-label";
+  label.textContent = list.length === 1 ? "1 geschriebene Frage" : `${list.length} geschriebene Fragen`;
+
+  const stack = document.createElement("div");
+  stack.className = "catalog";
+  const groups = new Map();
+  for (const item of list) {
+    if (!groups.has(item.topic)) groups.set(item.topic, []);
+    groups.get(item.topic).push(item);
+  }
+
+  for (const [topicId, items] of groups) {
+    const block = document.createElement("section");
+    const heading = document.createElement("h2");
+    heading.textContent = topics.find((topic) => topic.id === topicId)?.label || topicId;
+    const questions = document.createElement("div");
+    questions.className = "question-list";
+    for (const item of items) {
+      const button = document.createElement("button");
+      button.type = "button";
+      button.className = "question";
+      button.textContent = item.ask;
+      button.addEventListener("click", () => {
+        input.value = item.ask;
+        ask(item.ask);
+      });
+      questions.append(button);
+    }
+    block.append(heading, questions);
+    stack.append(block);
+  }
+
+  catalogRoot.append(label, stack);
 }
 
 function ask(value) {
