@@ -54,6 +54,8 @@ function renderAnswer(result) {
   mark.className = result.checked ? "mark mark-checked" : "mark mark-open";
   mark.textContent = result.mark;
 
+  const notice = renderNotice(result);
+
   const title = document.createElement("h2");
   title.textContent = result.title;
 
@@ -87,7 +89,41 @@ function renderAnswer(result) {
   columns.className = "columns";
   columns.append(renderList(result.labels.known, result.known), renderList(result.labels.open, result.open));
 
-  answer.append(mark, title, summary, ...(result.neighbor ? [neighbor] : []), unfoldLabel, steps, columns);
+  answer.append(...(notice ? [notice] : []), mark, title, summary, ...(result.neighbor ? [neighbor] : []), unfoldLabel, steps, columns);
+  if (notice) notice.focus();
+}
+
+function renderNotice(result) {
+  if (!result.message) return null;
+
+  const notice = document.createElement("div");
+  notice.className = "notice";
+  notice.tabIndex = -1;
+
+  const kicker = document.createElement("p");
+  kicker.className = "notice-kicker";
+  kicker.textContent = result.lang === "en" ? "Message" : "Nachricht";
+
+  const text = document.createElement("p");
+  text.textContent = result.message;
+  notice.append(kicker, text);
+
+  if (!result.suggestion) return notice;
+
+  const suggest = document.createElement("p");
+  suggest.className = "notice-kicker";
+  suggest.textContent = result.lang === "en" ? "Suggestion" : "Vorschlag";
+
+  const button = document.createElement("button");
+  button.type = "button";
+  button.className = "chip";
+  button.textContent = result.suggestion;
+  button.addEventListener("click", () => {
+    input.value = result.suggestion;
+    ask(result.suggestion);
+  });
+  notice.append(suggest, button);
+  return notice;
 }
 
 function renderList(label, items) {

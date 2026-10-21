@@ -656,6 +656,10 @@ function compose(parsed) {
     summary: english
       ? "There is no checked explanation for this question here. The notes below do not say what would happen. They show which bound is found in this sentence, and which is not."
       : "Dazu gibt es hier keine geprüfte Erklärung. Die Punkte unten sagen nicht, was passieren würde. Sie zeigen, welche Grenze in diesem Satz zu finden ist und welche nicht.",
+    message: english
+      ? "This question is unchecked. Nothing here is written for it."
+      : "Diese Frage ist ungeprüft. Dazu ist hier nichts geschrieben.",
+    suggestion: nearby ? nearby.written[parsed.lang] : undefined,
     neighbor: nearby ? neighborLine(nearby, parsed.lang) : undefined,
     steps,
     known: found.length

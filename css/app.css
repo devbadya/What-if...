@@ -187,6 +187,44 @@ button:focus-visible,
   background: #f4e0d2;
 }
 
+.notice {
+  margin: 0 0 22px;
+  padding: 16px 18px 18px;
+  border-radius: 16px;
+  background: #f4e0d2;
+}
+
+.notice:focus {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+
+.notice-kicker {
+  margin: 14px 0 0;
+  color: var(--accent);
+  font-size: 0.75rem;
+  font-weight: 520;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.notice-kicker:first-child,
+.notice p {
+  margin-top: 0;
+}
+
+.notice-kicker + p {
+  margin-top: 6px;
+}
+
+.notice p + .notice-kicker {
+  margin-top: 14px;
+}
+
+.notice .chip {
+  margin-top: 8px;
+}
+
 .answer h2 {
   margin: 0;
   font-family: var(--serif);

@@ -17,6 +17,7 @@ describe("written questions", () => {
       const result = explain(example);
       assert.equal(result.checked, true);
       assert.equal(result.neighbor, undefined);
+      assert.equal(result.message, undefined);
       assert.equal(result.mark, "Für diese Frage geschrieben");
     });
   }
@@ -62,6 +63,8 @@ describe("unchecked questions", () => {
     const result = explain("die Bienen verschwinden über Nacht");
     assert.equal(result.checked, false);
     assert.equal(result.neighbor, undefined);
+    assert.match(result.message, /ungeprüft/);
+    assert.equal(result.suggestion, undefined);
     assert.ok(result.known.some((item) => item.includes("über Nacht")));
     assert.ok(result.open.every((item) => !/ab wann/i.test(item)));
     assert.ok(result.open.some((item) => item === "Wie lange es gilt."));
@@ -98,13 +101,15 @@ describe("unchecked questions", () => {
       const result = explain(question);
       assert.equal(result.checked, false, question);
       assert.ok(result.neighbor, question);
-      const text = [result.summary, result.neighbor, ...result.steps.map((step) => step.text), ...result.known, ...result.open].join("\n");
+      const text = [result.summary, result.message, result.suggestion, result.neighbor, ...result.steps.map((step) => step.text), ...result.known, ...result.open].join("\n");
       assert.doesNotMatch(text, leaked, question);
     }
   });
 
   it("points a larger moon at the written moon question", () => {
     const result = explain("der Mond wird doppelt so groß");
+    assert.match(result.message, /ungeprüft/);
+    assert.equal(result.suggestion, "der Mond über Nacht verschwindet");
     assert.match(result.neighbor, /der Mond über Nacht verschwindet/);
     assert.match(result.steps.map((step) => step.text).join(" "), /Geschrieben ist: der Mond über Nacht verschwindet/);
   });
@@ -112,6 +117,8 @@ describe("unchecked questions", () => {
   it("points an English moon question at the English text", () => {
     const result = explain("what if the Moon grew twice as large");
     assert.equal(result.lang, "en");
+    assert.match(result.message, /unchecked/i);
+    assert.equal(result.suggestion, "the Moon disappeared overnight");
     assert.match(result.neighbor, /the Moon disappeared overnight/);
     assert.doesNotMatch(result.summary, /tide/i);
   });
