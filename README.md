@@ -6,7 +6,7 @@ https://devbadya.github.io/What-if.../
 
 Stell eine Frage hinter **What if**.
 
-Vierzig Fragen haben eine Erklärung, die für genau diesen Fall geschrieben ist. Beim Tippen erkennt die Seite, welche davon gemeint ist, und schlägt sie vor. Für alle anderen kommt eine Nachricht: die Frage ist ungeprüft. Die Erklärung einer Nachbarfrage wird erst verwendet, wenn der Vorschlag angenommen wird. Die Seite erfindet keine Fakten.
+Vierzig Fragen haben eine Erklärung, die für genau diesen Fall geschrieben ist. Beim Tippen erkennt die Seite, welche davon gemeint ist, und schlägt sie vor. Unter „Was sich sagen lässt“ steht die Herkunft: Physik, Körper, Technik, Natur oder Überlegung. Oben schaltet ein Menü die ganze Seite zwischen Deutsch und Englisch. Für alle anderen kommt eine Nachricht: die Frage ist ungeprüft. Die Erklärung einer Nachbarfrage wird erst verwendet, wenn der Vorschlag angenommen wird. Die Seite erfindet keine Fakten.
 
 Die Erklärung läuft im Browser. Die Frage wird dabei nicht an einen Dienst geschickt.
 

@@ -19,12 +19,16 @@
   </head>
   <body>
     <main class="page">
-      <p class="kicker">Eine Frage, eine Erklärung</p>
+      <div class="lang" role="group" aria-label="Sprache">
+        <button type="button" id="to-de">Deutsch</button>
+        <button type="button" id="to-en">English</button>
+      </div>
+      <p class="kicker" id="kicker">Eine Frage, eine Erklärung</p>
       <h1>What if<span>...</span></h1>
-      <p class="lede">Vierzig Fragen haben einen eigenen Text. Die Seite erkennt, welche du meinst, und schlägt sie vor.</p>
+      <p class="lede" id="lede">Vierzig Fragen haben einen eigenen Text. Die Seite erkennt, welche du meinst, und schlägt sie vor.</p>
 
       <form id="ask">
-        <label class="field" for="question">Deine Frage hinter What if</label>
+        <label class="field" id="question-label" for="question">Deine Frage hinter What if</label>
         <div class="ask">
           <input
             id="question"
@@ -35,14 +39,14 @@
             enterkeyhint="go"
             required
           />
-          <button type="submit">Erklären</button>
+          <button type="submit" id="submit">Erklären</button>
         </div>
         <p id="hint" class="hint" hidden>Schreib hinter „What if“ noch, was passieren soll.</p>
         <div id="suggest" class="group" hidden></div>
       </form>
 
       <div class="group">
-        <p class="group-label">Zum Einstieg</p>
+        <p class="group-label" id="start-label">Zum Einstieg</p>
         <div id="examples" class="chips"></div>
       </div>
 
@@ -53,7 +57,7 @@
 
       <section id="answer" class="answer" hidden aria-live="polite"></section>
 
-      <p class="foot">Die Fragen in der Liste sind für genau diesen Fall geschrieben. Passt keine, kommt eine Nachricht.</p>
+      <p class="foot" id="foot">Die Fragen in der Liste sind für genau diesen Fall geschrieben. Passt keine, kommt eine Nachricht.</p>
     </main>
     <script type="module" src="js/app.js"></script>
   </body>

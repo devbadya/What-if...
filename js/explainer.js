@@ -33,31 +33,49 @@ export const examples = [
 ];
 
 export const topics = [
-  { id: "alle", label: "Alle" },
-  { id: "himmel", label: "Himmel" },
-  { id: "koerper", label: "Körper" },
-  { id: "zusammen", label: "Zusammenleben" },
-  { id: "technik", label: "Technik" },
-  { id: "natur", label: "Natur" },
-  { id: "sinn", label: "Sinne und Regeln" },
+  { id: "alle", de: "Alle", en: "All" },
+  { id: "himmel", de: "Himmel", en: "Sky" },
+  { id: "koerper", de: "Körper", en: "Body" },
+  { id: "zusammen", de: "Zusammenleben", en: "Living together" },
+  { id: "technik", de: "Technik", en: "Technology" },
+  { id: "natur", de: "Natur", en: "Nature" },
+  { id: "sinn", de: "Sinne und Regeln", en: "Senses and rules" },
 ];
 
-export function questionsFor(topicId) {
-  const scenes = !topicId || topicId === "alle" ? SCENES : SCENES.filter((scene) => scene.topic === topicId);
-  return scenes.map((scene) => ({ topic: scene.topic, ask: scene.written.de }));
+const BASIS = {
+  himmel: { de: "Physik", en: "Physics" },
+  koerper: { de: "Körper", en: "The body" },
+  zusammen: { de: "Überlegung", en: "Reasoning" },
+  technik: { de: "Technik", en: "Technology" },
+  natur: { de: "Natur", en: "Nature" },
+  sinn: { de: "Überlegung", en: "Reasoning" },
+};
+
+export function featured(lang = "de") {
+  const useLang = lang === "en" ? "en" : "de";
+  return examples.map((text) => SCENES.find((scene) => scene.written.de === text)?.written[useLang] || text);
 }
 
-export function suggestions(raw, limit = 4) {
+export function questionsFor(topicId, lang = "de") {
+  const useLang = lang === "en" ? "en" : "de";
+  const scenes = !topicId || topicId === "alle" ? SCENES : SCENES.filter((scene) => scene.topic === topicId);
+  return scenes.map((scene) => ({ topic: scene.topic, ask: scene.written[useLang] }));
+}
+
+export function suggestions(raw, limit = 4, lang = "de") {
   const text = String(raw || "").toLowerCase().trim();
   if (text.length < 2) return [];
+  const useLang = lang === "en" ? "en" : "de";
   return SCENES.map((scene) => {
     let score = 0;
     for (const key of scene.keywords || []) {
-      if (text.includes(key)) score += key.length;
+      if (hasWord(text, key.toLowerCase())) score += key.length;
     }
-    const written = scene.written.de.toLowerCase();
-    if (text.length > 3 && (written.includes(text) || text.includes(written))) score += 40;
-    return { ask: scene.written.de, score };
+    for (const written of [scene.written.de, scene.written.en]) {
+      const norm = written.toLowerCase();
+      if (text.length > 3 && (norm.includes(text) || text.includes(norm))) score += 40;
+    }
+    return { ask: scene.written[useLang], score };
   })
     .filter((item) => item.score > 0)
     .sort((a, b) => b.score - a.score)
@@ -66,17 +84,26 @@ export function suggestions(raw, limit = 4) {
     .map((item) => item.ask);
 }
 
-export function explain(raw) {
+export function explain(raw, lang) {
   const parsed = parseQuestion(raw);
   if (!parsed) return null;
 
+  const useLang = lang === "en" || lang === "de" ? lang : parsed.lang;
   const scene = SCENES.find((item) => item.patterns.some((pattern) => pattern.test(parsed.norm)));
-  const labels = LABELS[parsed.lang];
-  const body = scene ? scene[parsed.lang] : compose(parsed);
+  const labels = LABELS[useLang];
+  const body = scene ? scene[useLang] : compose({ ...parsed, lang: useLang });
+  const title = scene
+    ? useLang === "en"
+      ? `What if ${scene.written.en}?`
+      : `Was wäre, wenn ${scene.written.de}?`
+    : useLang === "en"
+      ? `What if ${parsed.clause}?`
+      : `Was wäre, wenn ${parsed.clause}?`;
 
   return {
-    lang: parsed.lang,
-    title: parsed.title,
+    lang: useLang,
+    title,
+    basis: scene ? scene.basis?.[useLang] || BASIS[scene.topic]?.[useLang] || null : null,
     checked: Boolean(scene),
     mark: scene ? labels.checked : labels.unchecked,
     labels: scene
@@ -84,6 +111,11 @@ export function explain(raw) {
       : { unfold: labels.check, known: labels.settled, open: labels.unset },
     ...body,
   };
+}
+
+function hasWord(text, key) {
+  const escaped = key.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+  return new RegExp(`(?<![\\p{L}\\p{N}_])${escaped}`, "iu").test(text);
 }
 
 function parseQuestion(raw) {

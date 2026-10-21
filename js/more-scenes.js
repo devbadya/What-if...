@@ -5,12 +5,19 @@ function steps(labels, texts) {
   return texts.map((text, index) => ({ when: labels[index], text }));
 }
 
+const BASIS_OVERRIDE = {
+  "ein Tag ein Jahr dauert": { de: "Physik", en: "Physics" },
+  "die Farben verschwinden": { de: "Physik", en: "Physics" },
+  "das Eis an den Polen in einem Jahr schmilzt": { de: "Physik", en: "Physics" },
+};
+
 function scene(topic, keywords, patterns, near, deWritten, enWritten, de, en) {
   return {
     topic,
     keywords,
     patterns,
     near,
+    basis: BASIS_OVERRIDE[deWritten],
     written: { de: deWritten, en: enWritten },
     de: { summary: de.summary, steps: steps(DE, de.steps), known: de.known, open: de.open },
     en: { summary: en.summary, steps: steps(EN, en.steps), known: en.known, open: en.open },
@@ -21,7 +28,7 @@ export const MORE_SCENES = [
   scene(
     "himmel",
     ["sonne", "sun"],
-    [/sonne.{0,30}(erlischt|verlischt|geht aus|verschwind)/, /sun.{0,40}(dark|goes out|vanish|disappear|dies)/, /(no|without) sun/],
+    [/sonne.{0,40}(erlischt|verlischt|geht aus|verschwind|weg\b|nicht mehr da)/, /(weg\b|keine|ohne).{0,25}sonne/, /sun.{0,40}(dark|gone|goes out|vanish|disappear|dies)/, /(no|without) sun/],
     [/sonne/, /\bsun\b/],
     "die Sonne erlischt",
     "the Sun went dark",
@@ -776,8 +783,8 @@ export const MORE_SCENES = [
   ),
   scene(
     "natur",
-    ["eis", "eiskappe", "ice cap", "polar ice"],
-    [/eis.{0,40}(schmilz|weg\b|tau)/, /eiskappe/, /polar ice/, /ice caps?/, /poles melt/],
+    ["eis", "eiskappe", "polkapp", "ice cap", "polar ice"],
+    [/eis.{0,40}(schmilz|schmelz|weg\b|tau)/, /eiskappe/, /polkapp.{0,30}(schmelz|schmilz|tau)/, /polar ice/, /ice caps?/, /poles melt/],
     [/\beis\b/, /ice cap/, /polar ice/],
     "das Eis an den Polen in einem Jahr schmilzt",
     "the polar ice melted within a year",
@@ -833,7 +840,7 @@ export const MORE_SCENES = [
   scene(
     "sinn",
     ["uhr", "uhren", "clock"],
-    [/uhr.{0,25}falsch/, /uhren.{0,25}(falsch|stehen|aus)/, /clocks?.{0,25}wrong/, /wrong clocks/],
+    [/uhr.{0,30}(falsch|nach\b|vor\b)/, /uhren.{0,30}(falsch|nach\b|vor\b|stehen|aus)/, /clocks?.{0,25}(wrong|slow|fast)/, /wrong clocks/],
     [/\buhr/, /\bclocks?\b/],
     "alle Uhren falsch gehen",
     "every clock were wrong",

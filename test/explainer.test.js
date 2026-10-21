@@ -132,6 +132,26 @@ describe("unchecked questions", () => {
   it("suggests a written question from a fragment", () => {
     assert.ok(suggestions("bienen").includes("die Bienen verschwinden"));
     assert.equal(questionsFor("alle").length, 40);
+    assert.ok(suggestions("bees", 4, "en").includes("the bees disappeared"));
+  });
+
+  it("opens the same question instead of only suggesting it", () => {
+    assert.equal(explain("die Sonne ist weg").checked, true);
+    assert.equal(explain("die Polkappen schmelzen").checked, true);
+    assert.equal(explain("die Uhren gehen nach").checked, true);
+  });
+
+  it("does not treat a letter sequence inside another word as a match", () => {
+    const found = suggestions("Menschen können fliegen");
+    assert.ok(found.includes("alle Menschen fliegen könnten"));
+    assert.equal(found.includes("niemand mehr lügen könnte"), false);
+  });
+
+  it("names where a written answer comes from", () => {
+    assert.equal(explain("der Mond über Nacht verschwindet").basis, "Physik");
+    assert.equal(explain("das Geld verschwindet").basis, "Überlegung");
+    assert.equal(explain("der Mond über Nacht verschwindet", "en").basis, "Physics");
+    assert.match(explain("die Bienen verschwinden", "en").title, /^What if /);
   });
 
   it("rejects a question that is too short", () => {

@@ -35,6 +35,29 @@ body {
   padding: 56px 0 96px;
 }
 
+.lang {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+}
+
+.lang button {
+  padding: 6px 12px;
+  border: 1px solid #c9b79a;
+  border-radius: 999px;
+  color: var(--muted);
+  background: transparent;
+  font: inherit;
+  font-size: 0.92rem;
+  cursor: pointer;
+}
+
+.lang button.is-on {
+  color: var(--paper);
+  background: var(--ink);
+  border-color: var(--ink);
+}
+
 .kicker,
 .group-label,
 .when {
@@ -354,6 +377,12 @@ button:focus-visible,
 
 .columns li + li {
   margin-top: 8px;
+}
+
+.basis {
+  margin: 2px 0 0;
+  color: var(--muted);
+  font-size: 0.82rem;
 }
 
 .foot {
